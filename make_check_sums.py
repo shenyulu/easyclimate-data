@@ -10,7 +10,16 @@ def file_md5_checksum(fname):
     return hash_md5.hexdigest()
 
 def main():
+    # netCDF file
     files = glob.glob('*.nc')
+    for ncf in files:
+        prefix = ncf.split('.')[0]
+        outf = '{}.md5'.format(prefix)
+        with open(outf, 'w') as f:
+            f.write(file_md5_checksum(ncf))
+
+    # CSV file
+    files = glob.glob('*.csv')
     for ncf in files:
         prefix = ncf.split('.')[0]
         outf = '{}.md5'.format(prefix)
